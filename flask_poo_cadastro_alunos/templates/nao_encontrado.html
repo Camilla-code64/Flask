@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+
+{% block title %}Aluno não encontrado{% endblock %}
+
+{% block content %}
+<h2>Aluno não encontrado</h2>
+<p>Não existe um aluno com o identificador informado.</p>
+<a href="{{ url_for('inicio') }}">Voltar à lista</a>
+{% endblock %}

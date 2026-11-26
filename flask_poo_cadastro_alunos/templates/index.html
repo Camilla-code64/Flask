@@ -1,0 +1,52 @@
+{% extends "base.html" %}
+
+{% block title %}Lista de Alunos{% endblock %}
+
+{% block content %}
+<h2>Novo aluno</h2>
+<form method="post" action="{{ url_for('inicio') }}">
+    <label for="nome">Nome</label>
+    <input id="nome" name="nome" type="text" required>
+
+    <label for="email">E-mail</label>
+    <input id="email" name="email" type="email" required>
+
+    <label for="curso">Curso</label>
+    <input id="curso" name="curso" type="text" required>
+
+    <button type="submit">Cadastrar aluno</button>
+</form>
+
+<h2>Alunos cadastrados</h2>
+{% if alunos %}
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Nome</th>
+            <th>E-mail</th>
+            <th>Curso</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for aluno in alunos %}
+        <tr>
+            <td>{{ aluno.id }}</td>
+            <td>{{ aluno.nome }}</td>
+            <td>{{ aluno.email }}</td>
+            <td>{{ aluno.curso }}</td>
+            <td>
+                <a href="{{ url_for('editar', id=aluno.id) }}">Editar</a>
+                <form method="post" action="{{ url_for('excluir', id=aluno.id) }}">
+                    <button type="submit">Excluir</button>
+                </form>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+{% else %}
+<p>Nenhum aluno cadastrado ainda.</p>
+{% endif %}
+{% endblock %}
